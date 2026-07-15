@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt Vault Co — Professional AI Prompt Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #1B2430;
+    --ink-deep: #131A24;
+    --paper: #F3EFE3;
+    --paper-dim: #E9E3D1;
+    --stamp-red: #B8412A;
+    --stamp-red-dark: #93321F;
+    --ledger-green: #3F6B4A;
+    --charcoal: #24211C;
+    --gold: #C9A227;
+    --line: rgba(243,239,227,0.18);
+    --line-strong: rgba(243,239,227,0.32);
+    --display: 'Special Elite', 'Courier New', monospace;
+    --body: 'Inter', system-ui, sans-serif;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+    --radius: 2px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Header ---------- */
+  header.site {
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    background: rgba(27,36,48,0.92);
+    backdrop-filter: blur(6px);
+    z-index: 50;
+  }
+  .site-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--display);
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+  }
+  .brand-seal {
+    width: 30px;
+    height: 30px;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--gold);
+    transform: rotate(-6deg);
+  }
+  nav.site-nav {
+    display: flex;
+    gap: 28px;
+    font-size: 0.85rem;
+    font-family: var(--mono);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  nav.site-nav a { text-decoration: none; opacity: 0.75; transition: opacity .15s; }
+  nav.site-nav a:hover { opacity: 1; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 88px 24px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(transparent, transparent 27px, var(--line) 28px);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .eyebrow-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .tab {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    padding: 6px 16px;
+    border: 1px dashed var(--line-strong);
+    border-left: none;
+    color: var(--paper);
+    opacity: 0.85;
+  }
+  .tab:first-child { border-left: 1px dashed var(--line-strong); }
+
+  h1.hero-title {
+    font-family: var(--display);
+    font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+    line-height: 1.18;
+    margin: 0 0 20px;
+    max-width: 780px;
+    margin-inline: auto;
+    position: relative;
+  }
+  .hero-sub {
+    font-family: var(--mono);
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    margin: 0 0 40px;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 44px;
+    position: relative;
+  }
+  .btn {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    padding: 15px 26px;
+    border-radius: var(--radius);
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn-primary {
+    background: var(--stamp-red);
+    color: var(--paper);
+    box-shadow: 3px 3px 0 var(--stamp-red-dark);
+  }
+  .btn-primary:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--stamp-red-dark); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--paper);
+    border-color: var(--line-strong);
+  }
+  .btn-secondary:hover { border-color: var(--paper); background: rgba(243,239,227,0.06); }
+
+  .trust {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--paper);
+    opacity: 0.7;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .trust .stars { color: var(--gold); letter-spacing: 2px; }
+
+  /* ---------- Section shell ---------- */
+  section { padding: 72px 24px; }
+  .section-head {
+    text-align: center;
+    margin-bottom: 44px;
+  }
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    margin: 0;
+  }
+
+  /* ---------- Products (ledger tickets) ---------- */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 28px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .ticket {
+    background: var(--paper);
+    color: var(--charcoal);
+    border-radius: var(--radius);
+    position: relative;
+    padding: 28px 26px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+  }
+  .ticket::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 6px;
+    background: repeating-linear-gradient(90deg, var(--stamp-red) 0 10px, transparent 10px 18px);
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .ticket-badge {
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    width: 58px;
+    height: 58px;
+    border: 2px solid var(--stamp-red);
+    border-radius: 50%;
+    color: var(--stamp-red);
+    display: grid;
+    place-items: center;
+    font-family: var(--display);
+    font-size: 0.62rem;
+    line-height: 1.15;
+    text-align: center;
+    transform: rotate(-10deg);
+    letter-spacing: 0.02em;
+  }
+  .ticket h3 {
+    font-family: var(--display);
+    font-size: 1.2rem;
+    margin: 0 26px 4px 0;
+    max-width: 75%;
+  }
+  .ticket p.desc {
+    font-size: 0.92rem;
+    opacity: 0.8;
+    margin: 0 0 14px;
+  }
+  .ticket .tags {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 18px;
+  }
+  .ticket .stub-divider {
+    border-top: 1px dashed rgba(36,33,28,0.35);
+    margin: 4px 0 16px;
+  }
+  .ticket-foot {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .buy-btn {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.03em;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 11px 20px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .buy-btn:hover { background: var(--stamp-red); }
+
+  /* ---------- Why (ledger lines) ---------- */
+  .why-panel {
+    background: var(--paper);
+    color: var(--charcoal);
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: var(--radius);
+    padding: 8px 0;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+  }
+  .why-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 32px;
+    border-bottom: 1px dashed rgba(36,33,28,0.25);
+  }
+  .why-row:last-child { border-bottom: none; }
+  .why-num {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--stamp-red);
+    width: 30px;
+    flex-shrink: 0;
+  }
+  .why-icon { font-size: 1.3rem; flex-shrink: 0; }
+  .why-text { font-size: 0.98rem; }
+  .why-text strong { display: block; font-family: var(--display); font-size: 1rem; margin-bottom: 2px; }
+
+  /* ---------- Preview ---------- */
+  .preview-frame {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--paper);
+    padding: 18px 18px 26px;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.32);
+    position: relative;
+  }
+  .preview-frame::before,
+  .preview-frame::after {
+    content: "";
+    position: absolute;
+    width: 44px; height: 18px;
+    background: rgba(201,162,39,0.35);
+    top: -9px;
+    transform: rotate(-3deg);
+  }
+  .preview-frame::before { left: 24px; }
+  .preview-frame::after { right: 24px; transform: rotate(3deg); }
+  .preview-inner {
+    background: repeating-linear-gradient(135deg, var(--paper-dim), var(--paper-dim) 12px, var(--paper) 12px, var(--paper) 24px);
+    border: 1px solid rgba(36,33,28,0.2);
+    aspect-ratio: 16/10;
+    display: grid;
+    place-items: center;
+    color: var(--charcoal);
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-align: center;
+    padding: 20px;
+  }
+  .preview-caption {
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--charcoal);
+    opacity: 0.65;
+    margin-top: 14px;
+  }
+
+  /* ---------- Testimonials ---------- */
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .testi-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px;
+    background: rgba(243,239,227,0.03);
+  }
+  .testi-stars { color: var(--gold); letter-spacing: 3px; font-size: 0.95rem; margin-bottom: 12px; }
+  .testi-quote { font-family: var(--display); font-size: 1.05rem; line-height: 1.5; margin: 0; }
+
+  /* ---------- FAQ ---------- */
+  .faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    border-bottom: 1px dashed var(--line-strong);
+  }
+  .faq-item:first-child { border-top: 1px dashed var(--line-strong); }
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--paper);
+    text-align: left;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 20px 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .faq-q .mark {
+    font-family: var(--mono);
+    color: var(--stamp-red);
+    font-size: 1.1rem;
+    transition: transform .2s ease;
+    flex-shrink: 0;
+  }
+  .faq-item[data-open="true"] .mark { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .25s ease;
+    font-size: 0.95rem;
+    opacity: 0.82;
+  }
+  .faq-a-inner { padding: 0 4px 20px; }
+  .faq-item[data-open="true"] .faq-a { max-height: 200px; }
+
+  /* ---------- Footer ---------- */
+  footer.site {
+    background: var(--ink-deep);
+    border-top: 1px solid var(--line);
+    padding: 40px 24px;
+    text-align: center;
+  }
+  .footer-links {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+  }
+  .footer-links a { text-decoration: none; opacity: 0.75; }
+  .footer-links a:hover { opacity: 1; }
+  .footer-dot { opacity: 0.4; margin: 0 12px; }
+  .footer-fine {
+    margin-top: 16px;
+    font-size: 0.72rem;
+    opacity: 0.4;
+    font-family: var(--mono);
+  }
+
+  @media (max-width: 640px) {
+    nav.site-nav { display: none; }
+    .why-row { padding: 18px 20px; }
+    section { padding: 56px 20px; }
+  }
+
+  /* ---------- Modal ---------- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(19,26,36,0.78);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 200;
+  }
+  .modal-overlay[data-visible="true"] { display: flex; }
+  .modal {
+    background: var(--paper);
+    color: var(--charcoal);
+    width: 100%;
+    max-width: 400px;
+    border-radius: var(--radius);
+    padding: 30px 28px 28px;
+    position: relative;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+  }
+  .modal::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: 6px;
+    background: repeating-linear-gradient(90deg, var(--stamp-red) 0 10px, transparent 10px 18px);
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-family: var(--mono);
+    font-size: 1.1rem;
+    color: var(--charcoal);
+    opacity: 0.55;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .modal-close:hover { opacity: 1; }
+  .modal-title {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    margin: 4px 0 6px;
+  }
+  .modal-sub {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    opacity: 0.6;
+    margin: 0 0 22px;
+  }
+  .field {
+    margin-bottom: 16px;
+  }
+  .field label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 6px;
+  }
+  .field input,
+  .field textarea,
+  .field select {
+    width: 100%;
+    font-family: var(--body);
+    font-size: 0.92rem;
+    padding: 11px 12px;
+    border: 1px solid rgba(36,33,28,0.3);
+    border-radius: var(--radius);
+    background: rgba(255,255,255,0.5);
+    color: var(--charcoal);
+  }
+  .field textarea { resize: vertical; min-height: 70px; }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    outline: 2px solid var(--stamp-red);
+    outline-offset: 1px;
+  }
+  .form-submit {
+    width: 100%;
+    font-family: var(--mono);
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
+    padding: 13px;
+    border: none;
+    border-radius: var(--radius);
+    background: var(--stamp-red);
+    color: var(--paper);
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background .15s ease;
+  }
+  .form-submit:hover { background: var(--stamp-red-dark); }
+  .form-note {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    opacity: 0.5;
+    margin-top: 14px;
+    text-align: center;
+  }
+  /* ---------- Add-review ---------- */
+  .testi-head-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .testi-head-row .section-head { margin-bottom: 0; }
+  .add-review-wrap {
+    text-align: center;
+    margin-top: -20px;
+    margin-bottom: 44px;
+  }
+  .star-picker {
+    display: flex;
+    gap: 4px;
+    font-size: 1.3rem;
+  }
+  .star-picker button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: rgba(36,33,28,0.3);
+    padding: 0;
+    line-height: 1;
+  }
+  .star-picker button[data-filled="true"] { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="site-row">
+    <div class="brand">
+      <span class="brand-seal">PV</span>
+      Prompt Vault Co.
+    </div>
+    <nav class="site-nav">
+      <a href="#products">Products</a>
+      <a href="#faq">FAQ</a>
+      <a href="#social">Pinterest</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow-tabs">
+      <span class="tab">ChatGPT</span>
+      <span class="tab">Claude</span>
+      <span class="tab">Gemini</span>
+    </div>
+    <h1 class="hero-title">Save hours with premium AI prompts.</h1>
+    <p class="hero-sub">Professional AI Prompt Systems</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#products">Get Global Prompt Engine</a>
+      <a class="btn btn-secondary" href="#preview">View Free Samples</a>
+    </div>
+    <div class="trust"><span class="stars">★★★★★</span> Trusted by AI creators</div>
+  </div>
+</section>
+
+<section id="products">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Featured</span>
+      <h2 class="section-title">Featured Products</h2>
+    </div>
+    <div class="products-grid">
+      <div class="ticket">
+        <span class="ticket-badge">VERIFIED<br>PROMPT</span>
+        <h3>Global Prompt Engine</h3>
+        <p class="desc">300+ premium prompts for marketing, coding, and SEO.</p>
+        <div class="tags">Marketing · Coding · SEO</div>
+        <div class="stub-divider"></div>
+        <div class="ticket-foot">
+          <button class="buy-btn" type="button">Buy Now</button>
+        </div>
+      </div>
+      <div class="ticket">
+        <span class="ticket-badge">VERIFIED<br>PROMPT</span>
+        <h3>India Prompt Playbook</h3>
+        <p class="desc">Local business prompts built for the Indian market.</p>
+        <div class="tags">Local Business Prompts</div>
+        <div class="stub-divider"></div>
+        <div class="ticket-foot">
+          <button class="buy-btn" type="button">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">The ledger</span>
+      <h2 class="section-title">Why Prompt Vault?</h2>
+    </div>
+    <div class="why-panel">
+      <div class="why-row">
+        <span class="why-num">01</span>
+        <span class="why-icon">⚡</span>
+        <span class="why-text"><strong>Save 10+ hours every week</strong>Skip the trial-and-error and start from prompts that already work.</span>
+      </div>
+      <div class="why-row">
+        <span class="why-num">02</span>
+        <span class="why-icon">🧠</span>
+        <span class="why-text"><strong>Expert-engineered prompts</strong>Written and tested by people who use AI tools every day.</span>
+      </div>
+      <div class="why-row">
+        <span class="why-num">03</span>
+        <span class="why-icon">🔄</span>
+        <span class="why-text"><strong>Lifetime updates</strong>Buy once, keep every future revision as models improve.</span>
+      </div>
+      <div class="why-row">
+        <span class="why-num">04</span>
+        <span class="why-icon">📥</span>
+        <span class="why-text"><strong>Instant PDF download</strong>Get your file right after checkout — no waiting.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="preview">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Take a look</span>
+      <h2 class="section-title">Preview</h2>
+    </div>
+    <div class="preview-frame">
+      <div class="preview-inner">Image of PDF pages</div>
+      <p class="preview-caption">Sample pages from a Prompt Vault PDF</p>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">On record</span>
+      <h2 class="section-title">Testimonials</h2>
+    </div>
+    <div class="add-review-wrap">
+      <button class="btn btn-secondary" type="button" data-open-review>+ Write a review</button>
+    </div>
+    <div class="testi-grid" id="testiGrid">
+    </div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="reviewOverlay" data-visible="false">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
+    <button class="modal-close" type="button" data-close-modal aria-label="Close">✕</button>
+    <h3 class="modal-title" id="reviewTitle">Write a review</h3>
+    <p class="modal-sub">Tell other creators what you think</p>
+    <form id="reviewForm">
+      <div class="field">
+        <label for="reviewName">Name</label>
+        <input type="text" id="reviewName" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label>Rating</label>
+        <div class="star-picker" id="starPicker" role="radiogroup" aria-label="Rating">
+          <button type="button" data-star="1" aria-label="1 star">★</button>
+          <button type="button" data-star="2" aria-label="2 stars">★</button>
+          <button type="button" data-star="3" aria-label="3 stars">★</button>
+          <button type="button" data-star="4" aria-label="4 stars">★</button>
+          <button type="button" data-star="5" aria-label="5 stars">★</button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="reviewQuote">Your review</label>
+        <textarea id="reviewQuote" required maxlength="140" placeholder="What did Prompt Vault help you do?"></textarea>
+      </div>
+      <button class="form-submit" type="submit">Post review</button>
+    </form>
+    <p class="form-note">Reviews are shown for this session only.</p>
+  </div>
+</div>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-eyebrow">Questions</span>
+      <h2 class="section-title">FAQ</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item" data-open="false">
+        <button class="faq-q" aria-expanded="false">
+          Can I use these with ChatGPT?
+          <span class="mark">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Yes.</div></div>
+      </div>
+      <div class="faq-item" data-open="false">
+        <button class="faq-q" aria-expanded="false">
+          Do they work with Claude?
+          <span class="mark">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Yes.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site" id="social">
+  <div class="footer-links">
+    <a href="#">Instagram</a><span class="footer-dot">•</span><a href="#">GitHub</a><span class="footer-dot">•</span><a href="#">Pinterest</a>
+  </div>
+  <div class="footer-fine">© 2026 Prompt Vault Co.</div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var isOpen = item.getAttribute('data-open') === 'true';
+      item.setAttribute('data-open', isOpen ? 'false' : 'true');
+      btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    });
+  });
+
+  /* ---- Generic modal open/close ---- */
+  function openModal(overlay){ overlay.setAttribute('data-visible', 'true'); }
+  function closeModal(overlay){ overlay.setAttribute('data-visible', 'false'); }
+
+  var reviewOverlay = document.getElementById('reviewOverlay');
+
+  document.querySelectorAll('[data-open-review]').forEach(function(btn){
+    btn.addEventListener('click', function(){ openModal(reviewOverlay); });
+  });
+  document.querySelectorAll('[data-close-modal]').forEach(function(btn){
+    btn.addEventListener('click', function(){ btn.closest('.modal-overlay').setAttribute('data-visible', 'false'); });
+  });
+  reviewOverlay.addEventListener('click', function(e){ if (e.target === reviewOverlay) closeModal(reviewOverlay); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeModal(reviewOverlay);
+  });
+
+  /* ---- Star picker ---- */
+  var starPicker = document.getElementById('starPicker');
+  var currentRating = 5;
+  function paintStars(rating){
+    starPicker.querySelectorAll('button').forEach(function(s){
+      s.setAttribute('data-filled', Number(s.getAttribute('data-star')) <= rating ? 'true' : 'false');
+    });
+  }
+  starPicker.querySelectorAll('button').forEach(function(s){
+    s.addEventListener('click', function(){
+      currentRating = Number(s.getAttribute('data-star'));
+      paintStars(currentRating);
+    });
+  });
+  paintStars(currentRating);
+
+  /* ---- Review submission ---- */
+  var reviewForm = document.getElementById('reviewForm');
+  var testiGrid = document.getElementById('testiGrid');
+  reviewForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('reviewName').value.trim();
+    var quote = document.getElementById('reviewQuote').value.trim();
+    if (!name || !quote) return;
+
+    var card = document.createElement('div');
+    card.className = 'testi-card';
+    var stars = document.createElement('div');
+    stars.className = 'testi-stars';
+    stars.textContent = '★'.repeat(currentRating) + '☆'.repeat(5 - currentRating);
+    var p = document.createElement('p');
+    p.className = 'testi-quote';
+    p.textContent = '"' + quote + '" — ' + name;
+
+    card.appendChild(stars);
+    card.appendChild(p);
+    testiGrid.appendChild(card);
+
+    reviewForm.reset();
+    currentRating = 5;
+    paintStars(currentRating);
+    closeModal(reviewOverlay);
+  });
+</script>
+
+</body>
+</html>

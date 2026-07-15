@@ -25,15 +25,15 @@
     --mono: 'IBM Plex Mono', 'Courier New', monospace;
     --radius: 2px;
   }
-
+ 
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-
+ 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
   }
-
+ 
   body {
     margin: 0;
     background: var(--ink);
@@ -42,20 +42,20 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
-
+ 
   a { color: inherit; }
-
+ 
   :focus-visible {
     outline: 2px solid var(--gold);
     outline-offset: 3px;
   }
-
+ 
   .wrap {
     max-width: 1120px;
     margin: 0 auto;
     padding: 0 24px;
   }
-
+ 
   /* ---------- Header ---------- */
   header.site {
     border-bottom: 1px solid var(--line);
@@ -101,7 +101,7 @@
   }
   nav.site-nav a { text-decoration: none; opacity: 0.75; transition: opacity .15s; }
   nav.site-nav a:hover { opacity: 1; }
-
+ 
   /* ---------- Hero ---------- */
   .hero {
     padding: 88px 24px 64px;
@@ -136,7 +136,7 @@
     opacity: 0.85;
   }
   .tab:first-child { border-left: 1px dashed var(--line-strong); }
-
+ 
   h1.hero-title {
     font-family: var(--display);
     font-size: clamp(2.1rem, 5.2vw, 3.6rem);
@@ -153,7 +153,7 @@
     color: var(--gold);
     margin: 0 0 40px;
   }
-
+ 
   .cta-row {
     display: flex;
     gap: 16px;
@@ -186,7 +186,7 @@
     border-color: var(--line-strong);
   }
   .btn-secondary:hover { border-color: var(--paper); background: rgba(243,239,227,0.06); }
-
+ 
   .trust {
     font-family: var(--mono);
     font-size: 0.82rem;
@@ -197,7 +197,7 @@
     gap: 8px;
   }
   .trust .stars { color: var(--gold); letter-spacing: 2px; }
-
+ 
   /* ---------- Section shell ---------- */
   section { padding: 72px 24px; }
   .section-head {
@@ -218,7 +218,7 @@
     font-size: clamp(1.5rem, 3vw, 2.1rem);
     margin: 0;
   }
-
+ 
   /* ---------- Products (ledger tickets) ---------- */
   .products-grid {
     display: grid;
@@ -305,7 +305,7 @@
     transition: background .15s ease;
   }
   .buy-btn:hover { background: var(--stamp-red); }
-
+ 
   /* ---------- Why (ledger lines) ---------- */
   .why-panel {
     background: var(--paper);
@@ -334,7 +334,7 @@
   .why-icon { font-size: 1.3rem; flex-shrink: 0; }
   .why-text { font-size: 0.98rem; }
   .why-text strong { display: block; font-family: var(--display); font-size: 1rem; margin-bottom: 2px; }
-
+ 
   /* ---------- Preview ---------- */
   .preview-frame {
     max-width: 640px;
@@ -377,7 +377,7 @@
     opacity: 0.65;
     margin-top: 14px;
   }
-
+ 
   /* ---------- Testimonials ---------- */
   .testi-grid {
     display: grid;
@@ -394,7 +394,7 @@
   }
   .testi-stars { color: var(--gold); letter-spacing: 3px; font-size: 0.95rem; margin-bottom: 12px; }
   .testi-quote { font-family: var(--display); font-size: 1.05rem; line-height: 1.5; margin: 0; }
-
+ 
   /* ---------- FAQ ---------- */
   .faq-list {
     max-width: 720px;
@@ -437,7 +437,7 @@
   }
   .faq-a-inner { padding: 0 4px 20px; }
   .faq-item[data-open="true"] .faq-a { max-height: 200px; }
-
+ 
   /* ---------- Footer ---------- */
   footer.site {
     background: var(--ink-deep);
@@ -459,13 +459,13 @@
     opacity: 0.4;
     font-family: var(--mono);
   }
-
+ 
   @media (max-width: 640px) {
     nav.site-nav { display: none; }
     .why-row { padding: 18px 20px; }
     section { padding: 56px 20px; }
   }
-
+ 
   /* ---------- Modal ---------- */
   .modal-overlay {
     position: fixed;
@@ -600,7 +600,7 @@
     line-height: 1;
   }
   .star-picker button[data-filled="true"] { color: var(--gold); }
-
+ 
   /* ---------- Chat widget ---------- */
   .chat-launcher {
     position: fixed;
@@ -624,7 +624,7 @@
   }
   .chat-launcher:hover { background: var(--stamp-red-dark); transform: translateY(-2px); }
   .chat-launcher[data-hidden="true"] { display: none; }
-
+ 
   .chat-panel {
     position: fixed;
     bottom: 22px;
@@ -748,7 +748,7 @@
 </style>
 </head>
 <body>
-
+ 
 <header class="site">
   <div class="site-row">
     <div class="brand">
@@ -762,7 +762,7 @@
     </nav>
   </div>
 </header>
-
+ 
 <section class="hero">
   <div class="wrap">
     <div class="eyebrow-tabs">
@@ -779,7 +779,7 @@
     <div class="trust"><span class="stars">★★★★★</span> Trusted by AI creators</div>
   </div>
 </section>
-
+ 
 <section id="products">
   <div class="wrap">
     <div class="section-head">
@@ -810,7 +810,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section id="why">
   <div class="wrap">
     <div class="section-head">
@@ -841,7 +841,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section id="preview">
   <div class="wrap">
     <div class="section-head">
@@ -854,7 +854,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section id="testimonials">
   <div class="wrap">
     <div class="section-head">
@@ -868,7 +868,7 @@
     </div>
   </div>
 </section>
-
+ 
 <div class="modal-overlay" id="reviewOverlay" data-visible="false">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="reviewTitle">
     <button class="modal-close" type="button" data-close-modal aria-label="Close">✕</button>
@@ -898,7 +898,7 @@
     <p class="form-note">Reviews are shown for this session only.</p>
   </div>
 </div>
-
+ 
 <section id="faq">
   <div class="wrap">
     <div class="section-head">
@@ -923,16 +923,16 @@
     </div>
   </div>
 </section>
-
+ 
 <footer class="site" id="social">
   <div class="footer-links">
     <a href="https://www.instagram.com/promptsvault.co/" target="_blank" rel="noopener">Instagram</a><span class="footer-dot">•</span><a href="https://pin.it/48FH3gbPx" target="_blank" rel="noopener">Pinterest</a>
   </div>
   <div class="footer-fine">© 2026 Prompt Vault Co.</div>
 </footer>
-
+ 
 <button class="chat-launcher" id="chatLauncher" type="button">💬 Ask a question</button>
-
+ 
 <div class="chat-panel" id="chatPanel">
   <div class="chat-head">
     <div>
@@ -954,7 +954,7 @@
     <button type="submit">Send</button>
   </form>
 </div>
-
+ 
 <script>
   document.querySelectorAll('.faq-q').forEach(function(btn){
     btn.addEventListener('click', function(){
@@ -964,13 +964,13 @@
       btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
     });
   });
-
+ 
   /* ---- Generic modal open/close ---- */
   function openModal(overlay){ overlay.setAttribute('data-visible', 'true'); }
   function closeModal(overlay){ overlay.setAttribute('data-visible', 'false'); }
-
+ 
   var reviewOverlay = document.getElementById('reviewOverlay');
-
+ 
   document.querySelectorAll('[data-open-review]').forEach(function(btn){
     btn.addEventListener('click', function(){ openModal(reviewOverlay); });
   });
@@ -981,7 +981,7 @@
   document.addEventListener('keydown', function(e){
     if (e.key === 'Escape') closeModal(reviewOverlay);
   });
-
+ 
   /* ---- Star picker ---- */
   var starPicker = document.getElementById('starPicker');
   var currentRating = 5;
@@ -997,7 +997,7 @@
     });
   });
   paintStars(currentRating);
-
+ 
   /* ---- Review submission ---- */
   var reviewForm = document.getElementById('reviewForm');
   var testiGrid = document.getElementById('testiGrid');
@@ -1006,7 +1006,7 @@
     var name = document.getElementById('reviewName').value.trim();
     var quote = document.getElementById('reviewQuote').value.trim();
     if (!name || !quote) return;
-
+ 
     var card = document.createElement('div');
     card.className = 'testi-card';
     var stars = document.createElement('div');
@@ -1015,17 +1015,17 @@
     var p = document.createElement('p');
     p.className = 'testi-quote';
     p.textContent = '"' + quote + '" — ' + name;
-
+ 
     card.appendChild(stars);
     card.appendChild(p);
     testiGrid.appendChild(card);
-
+ 
     reviewForm.reset();
     currentRating = 5;
     paintStars(currentRating);
     closeModal(reviewOverlay);
   });
-
+ 
   /* ---- Chat assistant (rule-based, no server required) ---- */
   var chatLauncher = document.getElementById('chatLauncher');
   var chatPanel = document.getElementById('chatPanel');
@@ -1033,7 +1033,7 @@
   var chatBody = document.getElementById('chatBody');
   var chatForm = document.getElementById('chatForm');
   var chatInput = document.getElementById('chatInput');
-
+ 
   chatLauncher.addEventListener('click', function(){
     chatPanel.setAttribute('data-visible', 'true');
     chatLauncher.setAttribute('data-hidden', 'true');
@@ -1043,7 +1043,7 @@
     chatPanel.setAttribute('data-visible', 'false');
     chatLauncher.setAttribute('data-hidden', 'false');
   });
-
+ 
   function addChatMsg(text, who){
     var msg = document.createElement('div');
     msg.className = 'chat-msg ' + who;
@@ -1051,7 +1051,7 @@
     chatBody.appendChild(msg);
     chatBody.scrollTop = chatBody.scrollHeight;
   }
-
+ 
   var knowledgeBase = [
     { keys: ['chatgpt'], answer: 'Yes — all Prompt Vault products are built to work directly with ChatGPT.' },
     { keys: ['claude'], answer: 'Yes, the prompts work with Claude as well.' },
@@ -1066,7 +1066,7 @@
     { keys: ['contact','support','help','human','instagram','pinterest'], answer: 'You can reach us on Instagram or Pinterest — links are in the footer at the bottom of the page.' },
     { keys: ['hi','hello','hey'], answer: 'Hey! Ask me about product compatibility, downloads, updates, or pricing.' }
   ];
-
+ 
   function getAnswer(question){
     var q = question.toLowerCase();
     for (var i = 0; i < knowledgeBase.length; i++) {
@@ -1076,7 +1076,7 @@
     }
     return "I don't have an answer for that one yet — check the FAQ section above, or reach out via Instagram or Pinterest in the footer.";
   }
-
+ 
   function sendChatQuestion(){
     var q = chatInput.value.trim();
     if (!q) return;
@@ -1087,12 +1087,12 @@
       chatInput.focus();
     }, 300);
   }
-
+ 
   chatForm.addEventListener('submit', function(e){
     e.preventDefault();
     sendChatQuestion();
   });
-
+ 
   var chatSendBtn = chatForm.querySelector('button[type="submit"]');
   if (chatSendBtn) {
     chatSendBtn.addEventListener('click', function(e){
@@ -1100,14 +1100,14 @@
       sendChatQuestion();
     });
   }
-
+ 
   chatInput.addEventListener('keydown', function(e){
     if (e.key === 'Enter') {
       e.preventDefault();
       sendChatQuestion();
     }
   });
-
+ 
   document.querySelectorAll('#chatQuick button').forEach(function(btn){
     btn.addEventListener('click', function(){
       var q = btn.getAttribute('data-q');
@@ -1116,6 +1116,6 @@
     });
   });
 </script>
-
+ 
 </body>
 </html>
